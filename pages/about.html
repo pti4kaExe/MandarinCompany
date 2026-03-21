@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании - Мандарин | Производитель окон и дверей в Крыму</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .about-header {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .about-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-content {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .mission-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .mission-text {
+            font-size: 1.3rem;
+            color: #FF8C42;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .stat-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF8C42;
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .certificate-card {
+            background: #F8F9FA;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .certificate-card i {
+            font-size: 3rem;
+            color: #FF8C42;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: #FF8C42;
+        }
+        
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .timeline-content {
+            width: calc(50% - 30px);
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: #FF8C42;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            left: calc(50% - 30px);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+            
+            .timeline-year {
+                left: 0;
+            }
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .team-card {
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #FFE5D9, #FFD4C4);
+            border-radius: 50%;
+            margin: 2rem auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="about-header">
+        <h1>О компании «Мандарин»</h1>
+        <p>Ваш надёжный партнёр в мире окон и дверей с 2015 года</p>
+    </div>
+
+    <div class="about-content">
+        <div class="mission-section">
+            <h2 class="section-title">Наша миссия</h2>
+            <div class="mission-text">
+                «Делать ваш дом теплее, уютнее и красивее, предлагая лучшие решения по доступным ценам»
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">2015</div>
+                <p>Год основания</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5000+</div>
+                <p>Довольных клиентов</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5 лет</div>
+                <p>Гарантия на все работы</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1 день</div>
+                <p>Срок установки</p>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Наша история</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2015</div>
+                <div class="timeline-content">
+                    <h3>Основание компании</h3>
+                    <p>Начало работы в Феодосии с небольшого цеха по производству окон</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2017</div>
+                <div class="timeline-content">
+                    <h3>Расширение ассортимента</h3>
+                    <p>Добавление дверей, балконов и роллет в линейку продукции</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2019</div>
+                <div class="timeline-content">
+                    <h3>Открытие нового цеха</h3>
+                    <p>Увеличение производственных мощностей в 2 раза</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <div class="timeline-content">
+                    <h3>Запуск онлайн-магазина</h3>
+                    <p>Возможность заказать продукцию онлайн с доставкой по Крыму</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">
+                    <h3>Юбилей 10 лет</h3>
+                    <p>5000+ довольных клиентов и новые горизонты развития</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Сертификаты и лицензии</h2>
+        <div class="certificates-grid">
+            <div class="certificate-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Сертификат качества</h3>
+                <p>Соответствие ГОСТ и международным стандартам</p>
+            </div>
+            <div class="certificate-card">
+                <i class="fas fa-trophy"></i>
+                <h3>Лучший производитель 2023</h3>
+                <p>Премия «Народное признание» в Крыму</p>
+            </div>
+            <div class="certificate-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>ISO 9001</h3>
+                <p>Сертификация системы менеджмента качества</p>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Наша команда</h2>
+        <div class="team-grid" id="teamGrid"></div>
+    </div>
+
+    <div id="footer"></div>
+
+    <div id="cartModal" class="modal"></div>
+    <div id="authModal" class="modal"></div>
+    <div id="chatCalculatorModal" class="modal"></div>
+    <div class="chat-calculator-btn" id="chatCalculatorBtn">
+        <i class="fas fa-calculator"></i>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/calculator.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        const teamMembers = [
+            { name: "Руслан Мустафаев", role: "Фронтенд-разработчик", icon: "👨‍💻", desc: "Отвечает за внешний вид и интерактивность сайта" },
+            { name: "Елизавета Озерова", role: "Бэкенд-разработчик", icon: "👩‍💻", desc: "Разрабатывает серверную часть и API" },
+            { name: "Алина Бананова", role: "Контент-менеджер", icon: "📝", desc: "Отвечает за наполнение сайта и SEO-оптимизацию" }
+        ];
+        
+        function renderTeam() {
+            const grid = document.getElementById("teamGrid");
+            if (!grid) return;
+            
+            grid.innerHTML = teamMembers.map(member => `
+                <div class="team-card">
+                    <div class="team-avatar">${member.icon}</div>
+                    <div class="team-info">
+                        <h3>${member.name}</h3>
+                        <p style="color: #FF8C42; font-weight: 500;">${member.role}</p>
+                        <p style="color: #666; margin-top: 0.5rem;">${member.desc}</p>
+                    </div>
+                </div>
+            `).join("");
+        }
+        
+        function renderHeader() {
+            const headerHtml = `
+                <header>
+                    <div class="header-container">
+                        <div class="logo">
+                            <h1><i class="fas fa-tangerine"></i> МАНДАРИН</h1>
+                            <p>Окна · Двери · Балконы · Роллеты · Ворота · Шторы · Кондиционеры</p>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="../index.html">Главная</a></li>
+                                <li><a href="catalog.html">Каталог</a></li>
+                                <li><a href="services.html">Услуги</a></li>
+                                <li><a href="portfolio.html">Портфолио</a></li>
+                                <li><a href="about.html" class="active">О компании</a></li>
+                                <li><a href="blog.html">Блог</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </nav>
+                        <div class="user-actions">
+                            <div class="cart-icon" id="cartIcon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                            <div class="user-icon" id="userIcon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            `;
+            document.getElementById('header').innerHTML = headerHtml;
+        }
+        
+        function renderFooter() {
+            const footerHtml = `
+                <footer>
+                    <div class="footer-content">
+                        <div class="footer-col">
+                            <h4>ООО «Мандарин»</h4>
+                            <p>Надёжные окна и двери от производителя в Феодосии и Крыму</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Контакты</h4>
+                            <p>ул. Советская 3, Феодосия<br>+7 (978) 123-45-67<br>info@mandarin.ru</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Мы в соцсетях</h4>
+                            <div class="social-links">
+                                <a href="https://wa.me/79781234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://t.me/mandarin_feo" target="_blank"><i class="fab fa-telegram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Режим работы</h4>
+                            <p>Пн-Пт: 9:00–19:00<br>Сб-Вс: 10:00–16:00</p>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        © 2025 ООО «Мандарин». Бесплатный замер, гарантия 5 лет, установка за 1 день.
+                    </div>
+                </footer>
+            `;
+            document.getElementById('footer').innerHTML = footerHtml;
+        }
+        
+        async function init() {
+            renderHeader();
+            renderFooter();
+            renderTeam();
+            await loadCartModal();
+            await loadAuthModal();
+            await loadCalculatorModal();
+            updateCartDisplay();
+            updateAuthUI();
+            
+            document.getElementById('cartIcon')?.addEventListener('click', openCartModal);
+            document.getElementById('userIcon')?.addEventListener('click', openAuthModal);
+            document.getElementById('chatCalculatorBtn')?.addEventListener('click', openChatCalculator);
+        }
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

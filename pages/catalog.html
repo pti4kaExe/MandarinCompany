@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Мандарин | Окна, двери, балконы в Феодосии</title>
+    <meta name="description" content="Широкий выбор окон, дверей, балконов, роллет, ворот и кондиционеров в Феодосии и Крыму">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <section class="catalog-page">
+        <div class="catalog-header">
+            <h1>Каталог товаров</h1>
+            <p>Выберите идеальное решение для вашего дома</p>
+        </div>
+
+        <div class="catalog-filters">
+            <div class="filters" id="filters"></div>
+            
+            <div class="additional-filters">
+                <select id="priceFilter" class="filter-select">
+                    <option value="all">Сортировка по цене</option>
+                    <option value="asc">Сначала дешевые</option>
+                    <option value="desc">Сначала дорогие</option>
+                </select>
+                
+                <select id="materialFilter" class="filter-select">
+                    <option value="all">Все материалы</option>
+                    <option value="pvc">ПВХ</option>
+                    <option value="wood">Дерево</option>
+                    <option value="metal">Металл</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid"></div>
+        
+        <div class="pagination" id="pagination">
+            <button class="page-btn" data-page="1">1</button>
+            <button class="page-btn" data-page="2">2</button>
+            <button class="page-btn" data-page="3">3</button>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <div id="cartModal" class="modal"></div>
+    <div id="authModal" class="modal"></div>
+    <div id="chatCalculatorModal" class="modal"></div>
+    <div class="chat-calculator-btn" id="chatCalculatorBtn">
+        <i class="fas fa-calculator"></i>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/calculator.js"></script>
+    <script src="../js/catalog.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        // Дополнительная логика для страницы каталога
+        let currentPage = 1;
+        let currentPriceSort = 'all';
+        let currentMaterial = 'all';
+        
+        function renderCatalogWithFilters() {
+            let filtered = [...catalogItems];
+            
+            // Фильтр по категории
+            const activeFilter = document.querySelector('.filter-btn.active');
+            const category = activeFilter ? activeFilter.dataset.filter : 'all';
+            if (category !== 'all') {
+                filtered = filtered.filter(item => item.category === category);
+            }
+            
+            // Фильтр по материалу
+            if (currentMaterial !== 'all') {
+                filtered = filtered.filter(item => item.material === currentMaterial);
+            }
+            
+            // Сортировка по цене
+            if (currentPriceSort === 'asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (currentPriceSort === 'desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+            
+            // Пагинация
+            const itemsPerPage = 6;
+            const start = (currentPage - 1) * itemsPerPage;
+            const paginatedItems = filtered.slice(start, start + itemsPerPage);
+            
+            renderCatalogItems(paginatedItems);
+            updatePagination(filtered.length, itemsPerPage);
+        }
+        
+        function renderCatalogItems(items) {
+            const grid = document.getElementById("catalogGrid");
+            if (!grid) return;
+            
+            grid.innerHTML = items.map(item => `
+                <div class="product-card">
+                    <div class="product-img">${item.icon}</div>
+                    <div class="product-info">
+                        <h3>${item.name}</h3>
+                        <p style="color:#666; font-size:0.9rem;">${item.desc}</p>
+                        <div class="price">${item.priceText}</div>
+                        <div class="product-buttons">
+                            <button class="btn btn-orange" onclick="addToCart(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                                🍊 В корзину
+                            </button>
+                            <button class="btn" onclick="goToOrderForm('${item.name}')">
+                                Заказать
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+        
+        function updatePagination(totalItems, itemsPerPage) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const paginationDiv = document.getElementById('pagination');
+            if (!paginationDiv) return;
+            
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+            }
+            paginationDiv.innerHTML = html;
+            
+            document.querySelectorAll('.page-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentPage = parseInt(btn.dataset.page);
+                    renderCatalogWithFilters();
+                });
+            });
+        }
+        
+        // Рендер шапки и футера
+        function renderHeader() {
+            const headerHtml = `
+                <header>
+                    <div class="header-container">
+                        <div class="logo">
+                            <h1><i class="fas fa-tangerine"></i> МАНДАРИН</h1>
+                            <p>Окна · Двери · Балконы · Роллеты · Ворота · Шторы · Кондиционеры</p>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="../index.html">Главная</a></li>
+                                <li><a href="catalog.html" class="active">Каталог</a></li>
+                                <li><a href="services.html">Услуги</a></li>
+                                <li><a href="portfolio.html">Портфолио</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="blog.html">Блог</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </nav>
+                        <div class="user-actions">
+                            <div class="cart-icon" id="cartIcon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                            <div class="user-icon" id="userIcon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            `;
+            document.getElementById('header').innerHTML = headerHtml;
+        }
+        
+        function renderFooter() {
+            const footerHtml = `
+                <footer>
+                    <div class="footer-content">
+                        <div class="footer-col">
+                            <h4>ООО «Мандарин»</h4>
+                            <p>Надёжные окна и двери от производителя в Феодосии и Крыму</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Контакты</h4>
+                            <p>ул. Советская 3, Феодосия<br>+7 (978) 123-45-67<br>info@mandarin.ru</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Мы в соцсетях</h4>
+                            <div class="social-links">
+                                <a href="https://wa.me/79781234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://t.me/mandarin_feo" target="_blank"><i class="fab fa-telegram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Режим работы</h4>
+                            <p>Пн-Пт: 9:00–19:00<br>Сб-Вс: 10:00–16:00</p>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        © 2025 ООО «Мандарин». Бесплатный замер, гарантия 5 лет, установка за 1 день.
+                    </div>
+                </footer>
+            `;
+            document.getElementById('footer').innerHTML = footerHtml;
+        }
+        
+        // Инициализация
+        async function init() {
+            renderHeader();
+            renderFooter();
+            renderFilters();
+            renderCatalogWithFilters();
+            await loadCartModal();
+            await loadAuthModal();
+            await loadCalculatorModal();
+            updateCartDisplay();
+            updateAuthUI();
+            
+            document.getElementById('cartIcon')?.addEventListener('click', openCartModal);
+            document.getElementById('userIcon')?.addEventListener('click', openAuthModal);
+            document.getElementById('chatCalculatorBtn')?.addEventListener('click', openChatCalculator);
+            
+            document.getElementById('priceFilter')?.addEventListener('change', (e) => {
+                currentPriceSort = e.target.value;
+                currentPage = 1;
+                renderCatalogWithFilters();
+            });
+            
+            document.getElementById('materialFilter')?.addEventListener('change', (e) => {
+                currentMaterial = e.target.value;
+                currentPage = 1;
+                renderCatalogWithFilters();
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<div class="product-card">
+    <div class="product-img">{icon}</div>
+    <div class="product-info">
+        <h3>{name}</h3>
+        <p style="color:#666; font-size:0.9rem;">{desc}</p>
+        <div class="price">{priceText}</div>
+        <div class="product-buttons">
+            <button class="btn btn-orange" onclick="addToCart({productData})">
+                🍊 В корзину
+            </button>
+            <button class="btn" onclick="goToOrderForm('{name}')">
+                Заказать
+            </button>
+        </div>
+    </div>
+</div>

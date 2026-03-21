@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - Мандарин | Замер, доставка, установка, гарантия</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .services-header {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .services-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-detail {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card-large {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .service-card-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon-large {
+            height: 200px;
+            background: linear-gradient(135deg, #FFE5D9, #FFD4C4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .service-content {
+            padding: 2rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            color: #1A2A3A;
+            margin-bottom: 1rem;
+        }
+        
+        .service-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .service-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .service-features li i {
+            color: #FF8C42;
+        }
+        
+        .price-tag {
+            font-size: 1.5rem;
+            color: #FF8C42;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .cta-section {
+            background: #F8F9FA;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="services-header">
+        <h1>Наши услуги</h1>
+        <p>Полный комплекс услуг по установке и обслуживанию</p>
+    </div>
+
+    <div class="service-detail">
+        <div class="service-detail-grid" id="servicesGrid"></div>
+    </div>
+
+    <div class="cta-section">
+        <h2>Нужна консультация?</h2>
+        <p>Наши специалисты готовы ответить на все ваши вопросы</p>
+        <div class="cta-buttons">
+            <button class="btn btn-orange" onclick="window.openChatCalculator()">Рассчитать стоимость</button>
+            <a href="../index.html#request" class="btn">Заказать замер</a>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <div id="cartModal" class="modal"></div>
+    <div id="authModal" class="modal"></div>
+    <div id="chatCalculatorModal" class="modal"></div>
+    <div class="chat-calculator-btn" id="chatCalculatorBtn">
+        <i class="fas fa-calculator"></i>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/calculator.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        const servicesDetails = [
+            {
+                icon: "fas fa-ruler-combined",
+                title: "Профессиональный замер",
+                description: "Точный замер проемов любой сложности. Выезд специалиста в удобное для вас время.",
+                features: ["Бесплатный выезд", "Точность до 1 мм", "Консультация специалиста"],
+                price: "Бесплатно"
+            },
+            {
+                icon: "fas fa-truck",
+                title: "Доставка",
+                description: "Быстрая и бережная доставка изделий до вашего объекта собственным транспортом.",
+                features: ["По Крыму", "Разгрузка включена", "Подъем на этаж"],
+                price: "от 1 500 ₽"
+            },
+            {
+                icon: "fas fa-tools",
+                title: "Установка под ключ",
+                description: "Профессиональный монтаж любой сложности с соблюдением всех технологий.",
+                features: ["Установка за 1 день", "Вывоз мусора", "Гарантия на монтаж 5 лет"],
+                price: "от 3 000 ₽"
+            },
+            {
+                icon: "fas fa-medal",
+                title: "Гарантийное обслуживание",
+                description: "Полное гарантийное и постгарантийное обслуживание всех установленных изделий.",
+                features: ["Гарантия 5 лет", "Бесплатный ремонт", "Сезонная регулировка"],
+                price: "Включено в гарантию"
+            }
+        ];
+        
+        function renderServicesDetail() {
+            const grid = document.getElementById("servicesGrid");
+            if (!grid) return;
+            
+            grid.innerHTML = servicesDetails.map(service => `
+                <div class="service-card-large">
+                    <div class="service-icon-large">
+                        <i class="${service.icon}" style="font-size: 4rem; color: #FF8C42;"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>${service.title}</h3>
+                        <p>${service.description}</p>
+                        <ul class="service-features">
+                            ${service.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
+                        </ul>
+                        <div class="price-tag">${service.price}</div>
+                        <button class="btn btn-orange" onclick="smoothScrollTo('request')">Заказать</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+        
+        function renderHeader() {
+            const headerHtml = `
+                <header>
+                    <div class="header-container">
+                        <div class="logo">
+                            <h1><i class="fas fa-tangerine"></i> МАНДАРИН</h1>
+                            <p>Окна · Двери · Балконы · Роллеты · Ворота · Шторы · Кондиционеры</p>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="../index.html">Главная</a></li>
+                                <li><a href="catalog.html">Каталог</a></li>
+                                <li><a href="services.html" class="active">Услуги</a></li>
+                                <li><a href="portfolio.html">Портфолио</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="blog.html">Блог</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </nav>
+                        <div class="user-actions">
+                            <div class="cart-icon" id="cartIcon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                            <div class="user-icon" id="userIcon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            `;
+            document.getElementById('header').innerHTML = headerHtml;
+        }
+        
+        function renderFooter() {
+            const footerHtml = `
+                <footer>
+                    <div class="footer-content">
+                        <div class="footer-col">
+                            <h4>ООО «Мандарин»</h4>
+                            <p>Надёжные окна и двери от производителя в Феодосии и Крыму</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Контакты</h4>
+                            <p>ул. Советская 3, Феодосия<br>+7 (978) 123-45-67<br>info@mandarin.ru</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Мы в соцсетях</h4>
+                            <div class="social-links">
+                                <a href="https://wa.me/79781234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://t.me/mandarin_feo" target="_blank"><i class="fab fa-telegram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Режим работы</h4>
+                            <p>Пн-Пт: 9:00–19:00<br>Сб-Вс: 10:00–16:00</p>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        © 2025 ООО «Мандарин». Бесплатный замер, гарантия 5 лет, установка за 1 день.
+                    </div>
+                </footer>
+            `;
+            document.getElementById('footer').innerHTML = footerHtml;
+        }
+        
+        async function init() {
+            renderHeader();
+            renderFooter();
+            renderServicesDetail();
+            await loadCartModal();
+            await loadAuthModal();
+            await loadCalculatorModal();
+            updateCartDisplay();
+            updateAuthUI();
+            
+            document.getElementById('cartIcon')?.addEventListener('click', openCartModal);
+            document.getElementById('userIcon')?.addEventListener('click', openAuthModal);
+            document.getElementById('chatCalculatorBtn')?.addEventListener('click', openChatCalculator);
+        }
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

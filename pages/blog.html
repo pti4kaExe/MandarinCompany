@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог - Мандарин | Полезные статьи об окнах и дверях</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .blog-header {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-categories {
+            padding: 2rem 5%;
+            text-align: center;
+        }
+        
+        .blog-grid-page {
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        .blog-post-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .blog-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .blog-post-image {
+            height: 250px;
+            background: linear-gradient(135deg, #FFE5D9, #FFD4C4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .blog-post-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-post-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #FF8C42;
+            font-size: 0.85rem;
+        }
+        
+        .blog-post-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1A2A3A;
+        }
+        
+        .blog-post-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: #FF8C42;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar-widget h3 {
+            margin-bottom: 1rem;
+            color: #1A2A3A;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-list a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .category-list a:hover {
+            color: #FF8C42;
+        }
+        
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .popular-post-icon {
+            width: 60px;
+            height: 60px;
+            background: #F8F9FA;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid-page {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="blog-header">
+        <h1>Наш блог</h1>
+        <p>Полезные статьи об окнах, дверях и уходе за ними</p>
+    </div>
+
+    <div class="blog-categories">
+        <div class="filters" id="blogFilters">
+            <button class="filter-btn active" data-filter="all">Все статьи</button>
+            <button class="filter-btn" data-filter="windows">Окна</button>
+            <button class="filter-btn" data-filter="doors">Двери</button>
+            <button class="filter-btn" data-filter="care">Уход и обслуживание</button>
+        </div>
+    </div>
+
+    <div class="blog-grid-page">
+        <div class="posts-container" id="postsContainer"></div>
+        <div class="sidebar">
+            <div class="sidebar-widget">
+                <h3>📚 Категории</h3>
+                <ul class="category-list" id="categoryList"></ul>
+            </div>
+            <div class="sidebar-widget">
+                <h3>🔥 Популярные статьи</h3>
+                <div id="popularPosts"></div>
+            </div>
+            <div class="sidebar-widget">
+                <h3>📧 Подписка</h3>
+                <p>Получайте новые статьи на почту</p>
+                <input type="email" placeholder="Ваш email" style="margin-top: 0.5rem;">
+                <button class="btn btn-orange" style="width:100%; margin-top: 0.5rem;" onclick="alert('Спасибо за подписку! 🍊')">Подписаться</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <div id="cartModal" class="modal"></div>
+    <div id="authModal" class="modal"></div>
+    <div id="chatCalculatorModal" class="modal"></div>
+    <div class="chat-calculator-btn" id="chatCalculatorBtn">
+        <i class="fas fa-calculator"></i>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/calculator.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        const blogPosts = [
+            { id: 1, title: "Как ухаживать за окнами зимой", category: "care", icon: "❄️", excerpt: "Полезные советы по уходу за пластиковыми окнами в холодное время года. Как избежать запотевания и правильно регулировать фурнитуру.", date: "15 января 2024", author: "Алина Бананова", views: 1245 },
+            { id: 2, title: "Как выбрать входную дверь", category: "doors", icon: "🚪", excerpt: "На что обратить внимание при выборе входной двери для дома или квартиры. Материалы, утеплители, замки и уровень защиты.", date: "20 февраля 2024", author: "Руслан Мустафаев", views: 987 },
+            { id: 3, title: "Остекление балкона: плюсы и минусы", category: "windows", icon: "🏠", excerpt: "Преимущества остекления балкона и как это повышает комфорт в доме. Сравнение холодного и теплого остекления.", date: "5 марта 2024", author: "Елизавета Озерова", views: 2156 },
+            { id: 4, title: "5 признаков качественного окна", category: "windows", icon: "🪟", excerpt: "Как отличить качественное окно от подделки. Основные параметры, на которые стоит обратить внимание при выборе.", date: "10 апреля 2024", author: "Алина Бананова", views: 843 },
+            { id: 5, title: "Установка дверей своими руками", category: "doors", icon: "🔨", excerpt: "Можно ли установить межкомнатную дверь самостоятельно? Пошаговая инструкция и советы профессионалов.", date: "25 мая 2024", author: "Руслан Мустафаев", views: 567 },
+            { id: 6, title: "Как избавиться от конденсата на окнах", category: "care", icon: "💧", excerpt: "Почему появляется конденсат и как с ним бороться. Эффективные методы и профилактика.", date: "12 июня 2024", author: "Елизавета Озерова", views: 1789 }
+        ];
+        
+        function renderPosts(category = "all") {
+            const container = document.getElementById("postsContainer");
+            if (!container) return;
+            
+            const filtered = category === "all" ? blogPosts : blogPosts.filter(p => p.category === category);
+            
+            container.innerHTML = filtered.map(post => `
+                <div class="blog-post-card" onclick="window.location.href='blog-post.html?id=${post.id}'">
+                    <div class="blog-post-image">${post.icon}</div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">
+                            <span><i class="far fa-calendar"></i> ${post.date}</span>
+                            <span><i class="far fa-user"></i> ${post.author}</span>
+                            <span><i class="far fa-eye"></i> ${post.views}</span>
+                        </div>
+                        <h3 class="blog-post-title">${post.title}</h3>
+                        <p class="blog-post-excerpt">${post.excerpt}</p>
+                        <a href="blog-post.html?id=${post.id}" class="read-more">Читать далее →</a>
+                    </div>
+                </div>
+            `).join("");
+        }
+        
+        function renderCategories() {
+            const categories = [
+                { id: "all", name: "Все статьи" },
+                { id: "windows", name: "Окна" },
+                { id: "doors", name: "Двери" },
+                { id: "care", name: "Уход и обслуживание" }
+            ];
+            
+            const categoryList = document.getElementById("categoryList");
+            if (categoryList) {
+                categoryList.innerHTML = categories.map(cat => `
+                    <li><a href="#" onclick="filterPosts('${cat.id}'); return false;">${cat.name}</a></li>
+                `).join("");
+            }
+        }
+        
+        function renderPopularPosts() {
+            const popular = [...blogPosts].sort((a, b) => b.views - a.views).slice(0, 3);
+            const container = document.getElementById("popularPosts");
+            if (container) {
+                container.innerHTML = popular.map(post => `
+                    <div class="popular-post" onclick="window.location.href='blog-post.html?id=${post.id}'">
+                        <div class="popular-post-icon">${post.icon}</div>
+                        <div>
+                            <h4 style="font-size: 0.9rem;">${post.title}</h4>
+                            <span style="font-size: 0.8rem; color: #FF8C42;">${post.views} просмотров</span>
+                        </div>
+                    </div>
+                `).join("");
+            }
+        }
+        
+        function filterPosts(category) {
+            renderPosts(category);
+            document.querySelectorAll('#blogFilters .filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === category) btn.classList.add('active');
+            });
+        }
+        
+        function renderHeader() {
+            const headerHtml = `
+                <header>
+                    <div class="header-container">
+                        <div class="logo">
+                            <h1><i class="fas fa-tangerine"></i> МАНДАРИН</h1>
+                            <p>Окна · Двери · Балконы · Роллеты · Ворота · Шторы · Кондиционеры</p>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="../index.html">Главная</a></li>
+                                <li><a href="catalog.html">Каталог</a></li>
+                                <li><a href="services.html">Услуги</a></li>
+                                <li><a href="portfolio.html">Портфолио</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="blog.html" class="active">Блог</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </nav>
+                        <div class="user-actions">
+                            <div class="cart-icon" id="cartIcon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                            <div class="user-icon" id="userIcon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            `;
+            document.getElementById('header').innerHTML = headerHtml;
+        }
+        
+        function renderFooter() {
+            const footerHtml = `
+                <footer>
+                    <div class="footer-content">
+                        <div class="footer-col">
+                            <h4>ООО «Мандарин»</h4>
+                            <p>Надёжные окна и двери от производителя в Феодосии и Крыму</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Контакты</h4>
+                            <p>ул. Советская 3, Феодосия<br>+7 (978) 123-45-67<br>info@mandarin.ru</p>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Мы в соцсетях</h4>
+                            <div class="social-links">
+                                <a href="https://wa.me/79781234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://t.me/mandarin_feo" target="_blank"><i class="fab fa-telegram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Режим работы</h4>
+                            <p>Пн-Пт: 9:00–19:00<br>Сб-Вс: 10:00–16:00</p>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        © 2025 ООО «Мандарин». Бесплатный замер, гарантия 5 лет, установка за 1 день.
+                    </div>
+                </footer>
+            `;
+            document.getElementById('footer').innerHTML = footerHtml;
+        }
+        
+        async function init() {
+            renderHeader();
+            renderFooter();
+            renderPosts();
+            renderCategories();
+            renderPopularPosts();
+            await loadCartModal();
+            await loadAuthModal();
+            await loadCalculatorModal();
+            updateCartDisplay();
+            updateAuthUI();
+            
+            document.getElementById('cartIcon')?.addEventListener('click', openCartModal);
+            document.getElementById('userIcon')?.addEventListener('click', openAuthModal);
+            document.getElementById('chatCalculatorBtn')?.addEventListener('click', openChatCalculator);
+            
+            document.querySelectorAll('#blogFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#blogFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderPosts(this.dataset.filter);
+                });
+            });
+        }
+        
+        window.filterPosts = filterPosts;
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

@@ -162,7 +162,7 @@ function renderFooter() {
                 </div>
                 <div class="footer-col">
                     <h4>Режим работы</h4>
-                    <p>Пн-Пт: 9:00–17:00<br>Сб:10:00–16:00<br>Вс–Выходной</p>
+                    <p>Пн-Пт: 9:00–17:00<br>Сб:9:00–16:00<br>Вс–Выходной</p>
                 </div>
             </div>
             <div class="copyright">

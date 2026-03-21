@@ -150,23 +150,23 @@ function renderFooter() {
                 </div>
                 <div class="footer-col">
                     <h4>Контакты</h4>
-                    <p>ул. Советская 3, Феодосия<br>+7 (978) 123-45-67<br>info@mandarin.ru</p>
+                    <p>ул. Советская 3, Феодосия<br>+7 (978) 580-70-75<br>info@mandarin.ru</p>
                 </div>
                 <div class="footer-col">
                     <h4>Мы в соцсетях</h4>
                     <div class="social-links">
-                        <a href="https://wa.me/79781234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://t.me/mandarin_feo" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="///////////////" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="//////////////" target="_blank"><i class="fab fa-telegram"></i></a>
                         <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Режим работы</h4>
-                    <p>Пн-Пт: 9:00–19:00<br>Сб-Вс: 10:00–16:00</p>
+                    <p>Пн-Пт: 9:00–17:00<br>Сб:10:00–16:00<br>Вс–Выходной</p>
                 </div>
             </div>
             <div class="copyright">
-                © 2025 ООО «Мандарин». Бесплатный замер, гарантия 5 лет, установка за 1 день.
+                © 2026 ООО «Мандарин». Бесплатный замер, гарантия 5 лет, установка за 1 день.
             </div>
         </footer>
     `;

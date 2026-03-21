@@ -1,0 +1,122 @@
+/*МАНДАРИНОВАЯ АНИМАЦИЯ*/
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FF6B35 0%, #E5532E 50%, #C23B1A 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease;
+    cursor: pointer;
+}
+
+.mandarin-wrapper {
+    position: relative;
+    text-align: center;
+}
+
+.mandarin-fruit {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle at 35% 35%, #FFA500, #FF6B35);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    animation: mandarinFloat 2s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+}
+
+@keyframes mandarinFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.mandarin-fruit.falling {
+    animation: mandarinFall 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes mandarinFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(400px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.splash-text {
+    margin-top: 40px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.splash-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/*АНИМАЦИИ ДЛЯ ЭЛЕМЕНТОВ*/
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Применение анимаций */
+.hero h2 {
+    animation: slideUp 0.6s ease;
+}
+
+.product-card {
+    animation: fadeInUp 0.5s ease;
+}

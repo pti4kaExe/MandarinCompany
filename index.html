@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Мандарин | Окна, двери, балконы в Феодосии</title>
+    <meta name="description" content="ООО «Мандарин» - продажа и установка окон, дверей, балконов, роллет, ворот, штор и кондиционеров в Феодосии и Крыму. Бесплатный замер, гарантия 5 лет, установка за 1 день.">
+    <meta name="keywords" content="окна Феодосия, двери Крым, остекление балконов, мандарин окна, установка окон">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Экран с мандарином -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="mandarin-wrapper">
+            <div class="mandarin-fruit" id="mandarinFruit">🍊</div>
+        </div>
+        <div class="splash-text">🍊 МАНДАРИН 🍊<br>Нажми на мандарин, чтобы войти</div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-content" id="mainContent">
+        <!-- Header будет загружен через JS -->
+        <div id="header"></div>
+
+        <!-- Hero секция -->
+        <section id="home" class="hero">
+            <h2>🍊 Надёжные окна и двери от производителя</h2>
+            <p>Бесплатный замер | Гарантия 5 лет | Установка за 1 день</p>
+            <div class="hero-buttons">
+                <button class="btn btn-orange" onclick="window.openChatCalculator()">Рассчитать стоимость</button>
+                <a href="#request" class="btn">Заказать замер</a>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="section">
+            <h2 class="section-title">Почему выбирают «Мандарин»</h2>
+            <div class="advantages-grid" id="advantagesGrid"></div>
+        </section>
+
+        <!-- Каталог -->
+        <section id="catalog" class="section section-light">
+            <h2 class="section-title">Наш каталог</h2>
+            <div class="filters" id="filters"></div>
+            <div class="catalog-grid" id="catalogGrid"></div>
+        </section>
+
+        <!-- Услуги -->
+        <section id="services" class="section">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="advantages-grid" id="servicesGrid"></div>
+        </section>
+
+        <!-- Портфолио -->
+        <section id="portfolio" class="section section-light">
+            <h2 class="section-title">Наши работы</h2>
+            <div class="portfolio-grid" id="portfolioGrid"></div>
+        </section>
+
+        <!-- О компании -->
+        <section id="about" class="section">
+            <h2 class="section-title">О компании «Мандарин»</h2>
+            <div class="about-content" id="aboutContent"></div>
+        </section>
+
+        <!-- Блог -->
+        <section id="blog" class="section section-light">
+            <h2 class="section-title">Наш блог</h2>
+            <div class="blog-grid" id="blogGrid"></div>
+        </section>
+
+        <!-- Форма заявки -->
+        <section id="request" class="section">
+            <h2 class="section-title">Онлайн-заявка на замер</h2>
+            <form class="request-form" id="requestForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Ваше имя" required id="requestName">
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Телефон" required id="requestPhone">
+                </div>
+                <div class="form-group">
+                    <textarea rows="3" placeholder="Комментарий (желаемая дата замера, адрес)" id="requestComment"></textarea>
+                </div>
+                <button type="submit" class="btn btn-orange" style="width:100%;">🍊 Отправить заявку</button>
+            </form>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts" class="contacts-section">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-content" id="contactsContent"></div>
+        </section>
+
+        <!-- Footer будет загружен через JS -->
+        <div id="footer"></div>
+    </div>
+
+    <!-- Модальные окна -->
+    <div id="cartModal" class="modal"></div>
+    <div id="authModal" class="modal"></div>
+    <div id="chatCalculatorModal" class="modal"></div>
+
+    <!-- Кнопка чат-калькулятора -->
+    <div class="chat-calculator-btn" id="chatCalculatorBtn">
+        <i class="fas fa-calculator"></i>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/catalog.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
